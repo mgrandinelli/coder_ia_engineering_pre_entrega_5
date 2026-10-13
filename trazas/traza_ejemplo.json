@@ -1,0 +1,121 @@
+{
+  "thread_id": "sesion-20261013-144318",
+  "modelo": "guionado (modo demostración, sin API key)",
+  "recursion_limit": 10,
+  "mensajes_guardados": 20,
+  "llamadas_a_herramientas": 6,
+  "turnos": [
+    [
+      {
+        "tipo": "usuario",
+        "contenido": "¿Cuántos pedidos tuvo el cliente 102 y cuál fue el total? ¿Qué productos tenía el último?"
+      },
+      {
+        "tipo": "llamada_herramienta",
+        "herramienta": "buscar_pedidos",
+        "argumentos": {
+          "cliente_id": 102
+        }
+      },
+      {
+        "tipo": "resultado_herramienta",
+        "herramienta": "buscar_pedidos",
+        "contenido": "{\"cliente_id\": 102, \"nombre\": \"Ana Gómez\", \"pedidos\": 3, \"total\": 14500, \"pedido_ids\": [\"P-1021\", \"P-1032\", \"P-1045\"], \"ultimo_pedido_id\": \"P-1045\"}"
+      },
+      {
+        "tipo": "llamada_herramienta",
+        "herramienta": "detalle_pedido",
+        "argumentos": {
+          "pedido_id": "P-1045"
+        }
+      },
+      {
+        "tipo": "resultado_herramienta",
+        "herramienta": "detalle_pedido",
+        "contenido": "{\"pedido_id\": \"P-1045\", \"cliente_id\": 102, \"fecha\": \"2026-03-19\", \"importe\": 6500, \"estado\": \"en camino\", \"productos\": [\"Monitor de 24 pulgadas\", \"Cable HDMI\"]}"
+      },
+      {
+        "tipo": "respuesta",
+        "contenido": "El cliente 102 (Ana Gómez) tuvo 3 pedidos por un total de $14.500. El último, P-1045 del 19/03/2026, incluía un monitor de 24 pulgadas y un cable HDMI, y está en camino."
+      }
+    ],
+    [
+      {
+        "tipo": "usuario",
+        "contenido": "¿Y el anterior?"
+      },
+      {
+        "tipo": "llamada_herramienta",
+        "herramienta": "detalle_pedido",
+        "argumentos": {
+          "pedido_id": "P-1032"
+        }
+      },
+      {
+        "tipo": "resultado_herramienta",
+        "herramienta": "detalle_pedido",
+        "contenido": "{\"pedido_id\": \"P-1032\", \"cliente_id\": 102, \"fecha\": \"2026-02-03\", \"importe\": 3800, \"estado\": \"entregado\", \"productos\": [\"Auriculares con micrófono\"]}"
+      },
+      {
+        "tipo": "respuesta",
+        "contenido": "El pedido anterior, P-1032 del 03/02/2026, incluía unos auriculares con micrófono por $3.800 y ya fue entregado."
+      }
+    ],
+    [
+      {
+        "tipo": "usuario",
+        "contenido": "¿Cuántos pedidos tiene el cliente 999?"
+      },
+      {
+        "tipo": "llamada_herramienta",
+        "herramienta": "buscar_pedidos",
+        "argumentos": {
+          "cliente_id": 999
+        }
+      },
+      {
+        "tipo": "resultado_herramienta",
+        "herramienta": "buscar_pedidos",
+        "contenido": "{\"error\": \"No existe un cliente con id 999. Verificar el id o buscarlo por nombre con buscar_cliente.\"}"
+      },
+      {
+        "tipo": "respuesta",
+        "contenido": "No existe un cliente con el id 999. ¿Cuál es el nombre del cliente, para buscarlo por nombre?"
+      }
+    ],
+    [
+      {
+        "tipo": "usuario",
+        "contenido": "Me equivoqué de número: es Carla Ruiz."
+      },
+      {
+        "tipo": "llamada_herramienta",
+        "herramienta": "buscar_cliente",
+        "argumentos": {
+          "nombre": "Carla Ruiz"
+        }
+      },
+      {
+        "tipo": "resultado_herramienta",
+        "herramienta": "buscar_cliente",
+        "contenido": "{\"clientes\": [{\"cliente_id\": 107, \"nombre\": \"Carla Ruiz\"}]}"
+      },
+      {
+        "tipo": "llamada_herramienta",
+        "herramienta": "buscar_pedidos",
+        "argumentos": {
+          "cliente_id": 107
+        }
+      },
+      {
+        "tipo": "resultado_herramienta",
+        "herramienta": "buscar_pedidos",
+        "contenido": "{\"cliente_id\": 107, \"nombre\": \"Carla Ruiz\", \"pedidos\": 1, \"total\": 2100, \"pedido_ids\": [\"P-1050\"], \"ultimo_pedido_id\": \"P-1050\"}"
+      },
+      {
+        "tipo": "respuesta",
+        "contenido": "Carla Ruiz es el cliente 107 y tiene 1 pedido por un total de $2.100."
+      }
+    ]
+  ]
+}

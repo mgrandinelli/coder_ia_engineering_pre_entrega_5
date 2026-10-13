@@ -1,0 +1,31 @@
+thread_id: sesion-20261013-144318
+modelo: guionado (modo demostración, sin API key)
+recursion_limit: 10
+
+Usuario: "¿Cuántos pedidos tuvo el cliente 102 y cuál fue el total? ¿Qué productos tenía el último?"
+→ El agente decide usar la herramienta: buscar_pedidos(cliente_id=102)
+→ La herramienta devuelve: {"cliente_id": 102, "nombre": "Ana Gómez", "pedidos": 3, "total": 14500, "pedido_ids": ["P-1021", "P-1032", "P-1045"], "ultimo_pedido_id": "P-1045"}
+→ El agente decide usar la herramienta: detalle_pedido(pedido_id='P-1045')
+→ La herramienta devuelve: {"pedido_id": "P-1045", "cliente_id": 102, "fecha": "2026-03-19", "importe": 6500, "estado": "en camino", "productos": ["Monitor de 24 pulgadas", "Cable HDMI"]}
+→ El agente razona: ya tiene los datos → responde.
+Respuesta: "El cliente 102 (Ana Gómez) tuvo 3 pedidos por un total de $14.500. El último, P-1045 del 19/03/2026, incluía un monitor de 24 pulgadas y un cable HDMI, y está en camino."
+
+Usuario: "¿Y el anterior?"
+→ El agente decide usar la herramienta: detalle_pedido(pedido_id='P-1032')
+→ La herramienta devuelve: {"pedido_id": "P-1032", "cliente_id": 102, "fecha": "2026-02-03", "importe": 3800, "estado": "entregado", "productos": ["Auriculares con micrófono"]}
+→ El agente razona: ya tiene los datos → responde.
+Respuesta: "El pedido anterior, P-1032 del 03/02/2026, incluía unos auriculares con micrófono por $3.800 y ya fue entregado."
+
+Usuario: "¿Cuántos pedidos tiene el cliente 999?"
+→ El agente decide usar la herramienta: buscar_pedidos(cliente_id=999)
+→ La herramienta devuelve: {"error": "No existe un cliente con id 999. Verificar el id o buscarlo por nombre con buscar_cliente."}
+→ El agente razona: ya tiene los datos → responde.
+Respuesta: "No existe un cliente con el id 999. ¿Cuál es el nombre del cliente, para buscarlo por nombre?"
+
+Usuario: "Me equivoqué de número: es Carla Ruiz."
+→ El agente decide usar la herramienta: buscar_cliente(nombre='Carla Ruiz')
+→ La herramienta devuelve: {"clientes": [{"cliente_id": 107, "nombre": "Carla Ruiz"}]}
+→ El agente decide usar la herramienta: buscar_pedidos(cliente_id=107)
+→ La herramienta devuelve: {"cliente_id": 107, "nombre": "Carla Ruiz", "pedidos": 1, "total": 2100, "pedido_ids": ["P-1050"], "ultimo_pedido_id": "P-1050"}
+→ El agente razona: ya tiene los datos → responde.
+Respuesta: "Carla Ruiz es el cliente 107 y tiene 1 pedido por un total de $2.100."

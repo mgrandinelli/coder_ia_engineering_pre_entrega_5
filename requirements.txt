@@ -1,0 +1,11 @@
+langgraph>=1
+langgraph-checkpoint-sqlite>=3
+aiosqlite>=0.20
+langchain>=1
+langchain-openai>=1
+langchain-anthropic>=1
+python-dotenv>=1
+
+# Solo para correr los tests
+pytest>=8
+pytest-asyncio>=0.24
